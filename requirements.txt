@@ -1,0 +1,42 @@
+# MicroPython requirements for the ESP32 Translation Bot
+#
+# These libraries may need to be manually uploaded to the ESP32's filesystem
+# if they are not already part of your MicroPython firmware.
+#
+# You can typically find these libraries via `mip` (MicroPython package manager if available on your firmware)
+# or by downloading them from PyPI (if they are CPython compatible stubs like some drivers)
+# or from micropython-lib.
+
+# For making HTTP requests (used by OpenAI and Ollama clients)
+urequests
+
+# For parsing JSON data (used by OpenAI and Ollama clients)
+ujson
+
+# Notes for users:
+# - `network`: Standard MicroPython module for Wi-Fi.
+# - `time`: Standard MicroPython module.
+# - `machine`: Standard MicroPython module for hardware access (I2S, Pin, ADC).
+#
+# For actual audio hardware (microphone, speaker/amplifier), you might need
+# specific drivers or libraries depending on the components used. These are
+# not listed here as the current implementation uses placeholders.
+# Example: A driver for a specific I2S microphone or audio codec.
+#
+# If your MicroPython firmware includes `mip` (MicroPython Install Packages),
+# you might be able to install these using:
+# import mip
+# mip.install("urequests")
+# mip.install("ujson")
+#
+# Otherwise, download the .py files (e.g., from micropython-lib) and upload them
+# to the device's `/lib` directory or the root directory.
+# Links:
+# - micropython-lib: https://github.com/micropython/micropython-lib
+#   - urequests: https://github.com/micropython/micropython-lib/tree/master/python-ecosys/urequests
+#   - ujson: Usually built-in or use standard `json`. If `ujson` specifically is needed: https://github.com/micropython/micropython-lib/tree/master/python-stdlib/ujson
+#            (Note: `ujson` is often a built-in module in ESP32 firmware). Check `help('modules')`.
+#            If `json` is available and works, `ujson` might not be strictly needed as a separate file.
+#            However, explicitly coding for `ujson` was done in the clients.
+#            If your firmware has `json` but not `ujson`, you might need to alias or change imports.
+#            Most ESP32 firmwares should have `ujson` or `json`.
